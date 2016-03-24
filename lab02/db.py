@@ -291,6 +291,15 @@ def select_all_camera(request):
   return HttpResponse(map(lambda row: str(row) + '\n', rows))
 
 
+def select_distinct_camera():
+  con = mdb.connect(*mdb_args)
+  with con:
+    cur = con.cursor()
+    cur.execute('SELECT DISTINCT id, name FROM Camera')
+    rows = cur.fetchall()
+  return ((None, 'None'),) + rows
+
+
 def select_all_location(request):
   con = mdb.connect(*mdb_args)
   with con:
@@ -300,6 +309,15 @@ def select_all_location(request):
   return HttpResponse(map(lambda row: str(row) + '\n', rows))
 
 
+def select_distinct_location():
+  con = mdb.connect(*mdb_args)
+  with con:
+    cur = con.cursor()
+    cur.execute('SELECT DISTINCT id, name FROM Location')
+    rows = cur.fetchall()
+  return ((None, 'None'),) + rows
+
+
 def select_all_photographer(request):
   con = mdb.connect(*mdb_args)
   with con:
@@ -307,6 +325,15 @@ def select_all_photographer(request):
     cur.execute('SELECT * FROM Photographer')
     rows = cur.fetchall()
   return HttpResponse(map(lambda row: str(row) + '\n', rows))
+
+
+def select_distinct_photographer():
+  con = mdb.connect(*mdb_args)
+  with con:
+    cur = con.cursor()
+    cur.execute('SELECT DISTINCT id, name FROM Photographer')
+    rows = cur.fetchall()
+  return rows
 
 
 def select_all_photographer_location(request):
