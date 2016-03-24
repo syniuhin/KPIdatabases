@@ -1,5 +1,7 @@
-import MySQLdb as mdb
+import datetime
 from django.http import HttpResponse
+import MySQLdb as mdb
+import time
 
 from .fake_models import Photo
 
@@ -270,11 +272,14 @@ def insert_into_photo_single(d):
   with con:
     cur = con.cursor()
     cur.execute(
-      'INSERT INTO Photo(%s) VALUES(%s)' % \
+      'INSERT INTO Photo(%s) VALUES(%s)' %
       (','.join(existing_columns.keys()),
        ','.join(
-         map(lambda v: '\'' + v + '\'' if isinstance(v, basestring) else str(v),
-             existing_columns.values()))))
+         map(
+           lambda v: '\'' + v + '\'' if type(v) is str
+           else v.strftime('\'%Y-%m-%d %H:%M:%S\'') if type(v) is datetime.datetime
+           else str(v),
+           existing_columns.values()))))
 
 
 def select_all_camera(request):
