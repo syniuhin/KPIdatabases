@@ -48,4 +48,6 @@ urlpatterns = [
   url(r'^photo/delete/(?P<photo_id>[0-9]+)/$', views.delete_photo,
       name='delete_photo'),
   url(r'^photo/list/all/?$', PhotoListView.as_view(), name='photo_list'),
+  url(r'^photo/list/filter/?$', FilterPhotoListView.as_view(),
+      name='photo_list_filter'),
 ]

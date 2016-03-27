@@ -20,6 +20,11 @@ class PhotoForm(forms.Form):
                                   initial=datetime.datetime.now)
 
 
+class PhotoSearchForm(forms.Form):
+  name = forms.CharField(label='Photo name search', max_length=255,
+                         required=False)
+
+
 class CameraAttributesForm(forms.Form):
   date_created_from = forms.DateField(label='From', required=False)
   date_created_to = forms.DateField(label='To', required=False)
@@ -34,7 +39,7 @@ class LocationAttributesForm(forms.Form):
 
 class PhotographerAttributesForm(forms.Form):
   name = forms.ChoiceField(label='Name', required=False,
-                           choices=(
-                           ((None, 'None'),) + select_distinct_photographer()))
+                           choices=(((None, 'None'),) +
+                                    select_distinct_photographer()))
   level_from = forms.IntegerField(label='Level from', required=False)
   level_to = forms.IntegerField(label='Level to', required=False)

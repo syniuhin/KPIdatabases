@@ -151,3 +151,18 @@ class FilterPhotographerListView(FormListView):
     if hasattr(self, 'cleaned_data'):
       return select_filter_photographer(self.cleaned_data)
     return select_all_photographer()
+
+
+class FilterPhotoListView(FormListView):
+  form_class = PhotoSearchForm
+  template_name = 'lab02/photo_list_filtered.html'
+
+  def get_context_data(self, **kwargs):
+    context = super(FilterPhotoListView, self).get_context_data(**kwargs)
+    context['now'] = timezone.now()
+    return context
+
+  def get_queryset(self):
+    if hasattr(self, 'cleaned_data'):
+      return select_filter_photo(self.cleaned_data)
+    return select_all_photo(None)

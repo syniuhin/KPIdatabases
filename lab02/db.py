@@ -156,7 +156,7 @@ def create_photo(request):
           REFERENCES `lab02db`.`Photographer` (`id`)
           ON DELETE CASCADE
           ON UPDATE CASCADE)
-      ENGINE = InnoDB
+      ENGINE = MyISAM
       """)
   return HttpResponse('Photo created')
 
@@ -454,6 +454,29 @@ def select_all_photo(request):
       'LEFT JOIN `lab02db`.`Photographer` AS ph ON photo.photographer_id = ph.id '
       'LEFT JOIN `lab02db`.`Camera` AS cam ON photo.camera_id = cam.id '
       'LEFT JOIN `lab02db`.`Location` AS loc ON photo.location_id = loc.id')
+    rows = cur.fetchall()
+  return map(lambda row: Photo(*row), rows)
+
+
+def select_filter_photo(args):
+  con = mdb.connect(*mdb_args)
+  name = args['name']
+  if not name:
+    return select_all_photo(None)
+  with con:
+    cur = con.cursor()
+    cur.execute('SELECT photo.id AS id, '
+                'photo.name AS name, '
+                'ph.name AS photographer_name, '
+                'cam.name AS camera_name, '
+                'loc.name AS location_name, '
+                'photo.aperture, photo.iso, photo.shot_time '
+                'FROM `lab02db`.`Photo` AS photo '
+                'LEFT JOIN `lab02db`.`Photographer` AS ph ON photo.photographer_id = ph.id '
+                'LEFT JOIN `lab02db`.`Camera` AS cam ON photo.camera_id = cam.id '
+                'LEFT JOIN `lab02db`.`Location` AS loc ON photo.location_id = loc.id '
+                'WHERE MATCH(photo.name) '
+                'AGAINST (\'%s\' IN BOOLEAN MODE)' % name)
     rows = cur.fetchall()
   return map(lambda row: Photo(*row), rows)
 
