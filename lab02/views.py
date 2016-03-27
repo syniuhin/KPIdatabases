@@ -7,8 +7,8 @@ from django.views.generic.list import ListView
 from django.utils import timezone
 
 from .forms import PhotoForm
-from .db import edit_photo_single, insert_into_photo_single, select_all_photo,\
-  select_photo_by_id
+from .db import edit_photo_single, delete_photo_by_id, insert_into_photo_single, \
+  select_all_photo, select_photo_by_id
 
 
 def index(request):
@@ -20,6 +20,10 @@ def on_click_photo(request):
     if 'editbtn' in request.POST:
       url = reverse('edit_photo', kwargs={'photo_id':
                                             request.POST['tableradio']})
+      return HttpResponseRedirect(url)
+    if 'deletebtn' in request.POST:
+      url = reverse('delete_photo', kwargs={'photo_id':
+                                              request.POST['tableradio']})
       return HttpResponseRedirect(url)
   return HttpResponseBadRequest()
 
@@ -53,7 +57,9 @@ def edit_photo(request, photo_id):
 
 
 def delete_photo(request, photo_id):
-  print 'Yo'
+  photo_id = int(photo_id)
+  delete_photo_by_id(photo_id)
+  return HttpResponseRedirect('/lab02/photo/list/all/')
 
 
 class PhotoListView(ListView):

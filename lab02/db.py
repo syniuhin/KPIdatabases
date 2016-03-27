@@ -297,6 +297,13 @@ def edit_photo_single(d):
       'UPDATE Photo SET %s WHERE id = %d' % (update_arg, d['id']))
 
 
+def delete_photo_by_id(photo_id):
+  con = mdb.connect(*mdb_args)
+  with con:
+    cur = con.cursor()
+    cur.execute('DELETE FROM Photo WHERE id = %d' % photo_id)
+
+
 def select_all_camera(request):
   con = mdb.connect(*mdb_args)
   with con:
