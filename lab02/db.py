@@ -380,13 +380,31 @@ def select_distinct_location():
   return ((None, 'None'),) + rows
 
 
-def select_all_photographer(request):
+def select_all_photographer():
   con = mdb.connect(*mdb_args)
   with con:
     cur = con.cursor()
     cur.execute('SELECT * FROM Photographer')
     rows = cur.fetchall()
-  return HttpResponse(map(lambda row: str(row) + '\n', rows))
+  return map(lambda row: Photographer(*row), rows)
+
+
+def select_filter_photographer(args_dict):
+  where = []
+  if args_dict['name']:
+    where.append('name = \'%s\'' % args_dict['name'])
+  if 'level_from' in args_dict and args_dict['level_from']:
+    where.append('level >= %d' % args_dict['level_from'])
+  if 'level_to' in args_dict and args_dict['level_to']:
+    where.append('level <= %d' % args_dict['level_to'])
+  if len(where) == 0:
+    return select_all_photographer()
+  con = mdb.connect(*mdb_args)
+  with con:
+    cur = con.cursor()
+    cur.execute('SELECT * FROM Photographer WHERE %s' % ' AND '.join(where))
+    rows = cur.fetchall()
+  return map(lambda row: Photographer(*row), rows)
 
 
 def select_distinct_photographer():

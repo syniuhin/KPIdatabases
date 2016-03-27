@@ -16,6 +16,8 @@ urlpatterns = [
       name='photographer_insert'),
   url(r'^photographer/list/all/?$', db.select_all_photographer,
       name='photographer_select_all'),
+  url(r'^photographer/list/filter/$', FilterPhotographerListView.as_view(),
+      name='photographer_list_filter'),
   url(r'^location/create/?$', db.create_location, name='location_create'),
   url(r'^location/load/?$', db.initiate_insert_into_location,
       name='location_insert'),

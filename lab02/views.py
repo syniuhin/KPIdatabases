@@ -136,3 +136,18 @@ class FilterLocationListView(FormListView):
     if hasattr(self, 'cleaned_data'):
       return select_filter_location(self.cleaned_data)
     return select_all_location()
+
+
+class FilterPhotographerListView(FormListView):
+  form_class = PhotographerAttributesForm
+  template_name = 'lab02/photographer_list_filtered.html'
+
+  def get_context_data(self, **kwargs):
+    context = super(FilterPhotographerListView, self).get_context_data(**kwargs)
+    context['now'] = timezone.now()
+    return context
+
+  def get_queryset(self):
+    if hasattr(self, 'cleaned_data'):
+      return select_filter_photographer(self.cleaned_data)
+    return select_all_photographer()

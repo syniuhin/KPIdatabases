@@ -27,6 +27,14 @@ class CameraAttributesForm(forms.Form):
 
 
 class LocationAttributesForm(forms.Form):
-  accessible = forms.BooleanField(label='Accessible', required=False)
   lat = forms.FloatField(label='Latitude', required=False)
   lng = forms.FloatField(label='Longitude', required=False)
+  accessible = forms.BooleanField(label='Accessible', required=False)
+
+
+class PhotographerAttributesForm(forms.Form):
+  name = forms.ChoiceField(label='Name', required=False,
+                           choices=(
+                           ((None, 'None'),) + select_distinct_photographer()))
+  level_from = forms.IntegerField(label='Level from', required=False)
+  level_to = forms.IntegerField(label='Level to', required=False)
