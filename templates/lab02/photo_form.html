@@ -11,7 +11,7 @@
           href="/static/bootstrap/dist/css/bootstrap-theme.min.css">
 </head>
 <body>
-<h1 class="text-center">Add new photo</h1>
+<h1 class="text-center">Photo</h1>
 <style>
     .form-photo {
         max-width: 550px;
@@ -20,7 +20,7 @@
     }
 </style>
 <div class="container text-center">
-    <form class="form-photo" action="/lab02/photo/new/" method="post">
+    <form class="form-photo" action="./" method="post">
         {% load bootstrap %}
         {% csrf_token %}
         {{ form|bootstrap }}

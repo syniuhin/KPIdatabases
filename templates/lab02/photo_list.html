@@ -12,12 +12,14 @@
 </head>
 <body>
 <h1 class="text-center">Photos</h1>
-
+<form action="/lab02/photo/clicked/" method="post">
+    {% csrf_token %}
     <div class="col-lg-12">
         <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped tablesorter">
+            <table class="table table-responsive table-bordered table-hover table-striped tablesorter">
                 <thead>
                 <tr>
+                    <th></th>
                     <th class="header"> Name <i class="icon-sort"></i></th>
                     <th class="header"> Camera <i class="icon-sort"></i></th>
                     <th class="header"> Location <i class="icon-sort"></i>
@@ -33,7 +35,14 @@
 
                 {% for p in object_list %}
                     <tr>
-                        <td>{{ p.photo_name }}</td>
+                        <td>
+                            <div class="radio-sm">
+                                <label><input type="radio" id='express'
+                                              name="tableradio"
+                                              value="{{ p.id }}"></label>
+                            </div>
+                        </td>
+                        <td>{{ p.name }}</td>
                         <td>{{ p.photographer_name }}</td>
                         <td>{{ p.camera_name }}</td>
                         <td>{{ p.location_name }}</td>
@@ -46,5 +55,16 @@
                 </tbody>
             </table>
         </div>
+        <div class="container text-center">
+            <a type="button" class="btn btn-primary" name="add_button"
+               href="{% url 'new_photo' %}">Add
+            </a>
+            <button type="submit" class="btn btn-primary" name="editbtn">Edit
+            </button>
+            <input type="button" class="btn btn-primary" name="deletebtn"
+                   value="Delete"/>
+        </div>
+    </div>
+</form>
 </body>
 </html>

@@ -264,22 +264,37 @@ def insert_into_photographer_location(request, lines):
   return result
 
 
+def get_photo_sql_args(args_dict):
+  columns = ['camera_id', 'location_id', 'photographer_id', 'name',
+             'aperture', 'iso', 'shot_time']
+  existing_columns = {unicode(col): args_dict[col]
+                      for col in columns if args_dict[col]}
+  return (','.join(existing_columns.keys()),
+          ','.join(map(
+            lambda v: '\'' + v + '\'' if isinstance(v, basestring)
+            else v.strftime('\'%Y-%m-%d %H:%M:%S\'')
+            if isinstance(v, datetime.datetime)
+            else str(v), existing_columns.values())))
+
+
 def insert_into_photo_single(d):
   con = mdb.connect(*mdb_args)
-  columns = ['camera_id', 'location_id', 'photographer_id', 'photo_name',
-             'aperture', 'iso', 'shot_time']
-  existing_columns = {col: d[col] for col in columns if d[col]}
+  attributes, values = get_photo_sql_args(d)
+  with con:
+    cur = con.cursor()
+    cur.execute('INSERT INTO Photo(%s) VALUES(%s)' % (attributes, values))
+
+
+def edit_photo_single(d):
+  con = mdb.connect(*mdb_args)
+  attributes, values = get_photo_sql_args(d)
+  attributes, values = attributes.split(','), values.split(',')
+  update_arg = ','.join([attr + '=' + val
+                         for attr, val in zip(attributes, values)])
   with con:
     cur = con.cursor()
     cur.execute(
-      'INSERT INTO Photo(%s) VALUES(%s)' %
-      (','.join(existing_columns.keys()),
-       ','.join(
-         map(
-           lambda v: '\'' + v + '\'' if type(v) is str
-           else v.strftime('\'%Y-%m-%d %H:%M:%S\'') if type(v) is datetime.datetime
-           else str(v),
-           existing_columns.values()))))
+      'UPDATE Photo SET %s WHERE id = %d' % (update_arg, d['id']))
 
 
 def select_all_camera(request):
@@ -365,7 +380,7 @@ def select_all_photo(request):
     cur = con.cursor()
     cur.execute(
       'SELECT photo.id AS id, '
-      'photo.name AS photo_name, '
+      'photo.name AS name, '
       'ph.name AS photographer_name, '
       'cam.name AS camera_name, '
       'loc.name AS location_name, '
@@ -376,3 +391,31 @@ def select_all_photo(request):
       'LEFT JOIN `lab02db`.`Location` AS loc ON photo.location_id = loc.id')
     rows = cur.fetchall()
   return map(lambda row: Photo(*row), rows)
+
+
+def select_photo_by_id(p_id):
+  """
+  :param p_id: id of a Photo item to fetch.
+  :return: !! dictionary !!
+  """
+  con = mdb.connect(*mdb_args)
+  with con:
+    cur = con.cursor()
+    cur.execute('SELECT photo.id AS id, '
+                'photo.name AS name, '
+                'ph.name AS photographer_name, '
+                'cam.name AS camera_name, '
+                'loc.name AS location_name, '
+                'photo.aperture, '
+                'photo.iso, '
+                'photo.shot_time, '
+                'ph.id AS photographer_id, '
+                'cam.id AS camera_id, '
+                'loc.id AS location_id '
+                'FROM `lab02db`.`Photo` AS photo '
+                'LEFT JOIN `lab02db`.`Photographer` AS ph ON photo.photographer_id = ph.id '
+                'LEFT JOIN `lab02db`.`Camera` AS cam ON photo.camera_id = cam.id '
+                'LEFT JOIN `lab02db`.`Location` AS loc ON photo.location_id = loc.id '
+                'WHERE photo.id = %d ' % p_id)
+    row = cur.fetchall()[0]
+  return Photo(*row)

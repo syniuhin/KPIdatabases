@@ -35,6 +35,9 @@ urlpatterns = [
       db.select_all_photographer_location,
       name='photographer_location_select_all'),
   url(r'^photo/create/?$', db.create_photo, name='photo_create'),
-  url(r'^photo/new/?$', views.new_photo, name='new_photo'),
+  url(r'^photo/clicked/?$', views.on_click_photo, name='on_click_photo'),
+  url(r'^photo/new/$', views.new_photo, name='new_photo'),
+  url(r'^photo/edit/(?P<photo_id>[0-9]+)/$', views.edit_photo, name='edit_photo'),
+  url(r'^photo/delete/?$', views.delete_photo, name='delete_photo'),
   url(r'^photo/list/all/?$', PhotoListView.as_view(), name='photo_list'),
 ]

@@ -6,13 +6,13 @@ from .db import select_distinct_camera, select_distinct_location, \
 
 
 class PhotoForm(forms.Form):
-  photo_name = forms.CharField(label='Photo name', max_length=255,
-                               required=False)
-  photographer_id = forms.ChoiceField(label='Photographer id',
+  name = forms.CharField(label='Photo name', max_length=255,
+                         required=False)
+  photographer_id = forms.ChoiceField(label='Photographer',
                                       choices=select_distinct_photographer)
-  camera_id = forms.ChoiceField(label='Camera id', required=False,
+  camera_id = forms.ChoiceField(label='Camera', required=False,
                                 choices=select_distinct_camera)
-  location_id = forms.ChoiceField(label='Location id', required=False,
+  location_id = forms.ChoiceField(label='Location', required=False,
                                   choices=select_distinct_location)
   aperture = forms.FloatField(label='Aperture', required=False)
   iso = forms.IntegerField(label='ISO', required=False)
