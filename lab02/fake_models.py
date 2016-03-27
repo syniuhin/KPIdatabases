@@ -16,3 +16,11 @@ class Photo:
     self.aperture = aperture
     self.iso = iso
     self.shot_time = shot_time
+
+
+class Camera:
+  def __init__(self, cam_id, name, year_created, version):
+    self.id = cam_id
+    self.name = name
+    self.year_created = year_created
+    self.version = version

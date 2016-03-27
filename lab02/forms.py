@@ -18,3 +18,9 @@ class PhotoForm(forms.Form):
   iso = forms.IntegerField(label='ISO', required=False)
   shot_time = forms.DateTimeField(label='Shot time',
                                   initial=datetime.datetime.now)
+
+
+class CameraAttributesForm(forms.Form):
+  date_created_from = forms.DateField(label='From', required=False)
+  date_created_to = forms.DateField(label='To', required=False)
+  version = forms.IntegerField(label='Version', required=False)

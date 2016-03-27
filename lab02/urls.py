@@ -1,13 +1,15 @@
 from django.conf.urls import url
 
 from . import db, views
-from .views import PhotoListView
+from .views import FilterCameraListView, PhotoListView
 
 urlpatterns = [
   url(r'^$', views.index, name='index'),
   url(r'^camera/create/?$', db.create_camera, name='camera_create'),
   url(r'^camera/load/?$', db.initiate_insert_into_camera, name='camera_insert'),
   url(r'^camera/list/all/?$', db.select_all_camera, name='camera_select_all'),
+  url(r'^camera/list/filter/$', FilterCameraListView.as_view(),
+      name='photo_list'),
   url(r'^photographer/create/?$', db.create_photographer,
       name='photographer_create'),
   url(r'^photographer/load/?$', db.initiate_insert_into_photographer,

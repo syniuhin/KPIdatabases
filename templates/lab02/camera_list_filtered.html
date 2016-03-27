@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Filter photos</title>
+    <script src="/static/jquery/dist/jquery.js"></script>
+    <script type="text/javascript"
+            src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="/static/bootstrap/dist/css/bootstrap-theme.min.css">
+</head>
+<body>
+<style>
+    .form-photo {
+        max-width: 400px;
+        padding: 15px;
+        margin: 0 auto;
+    }
+</style>
+<h1 class="text-center">Camera</h1>
+<form class="form-photo form-horizontal" action="." method="post">
+    {% load bootstrap %}
+    {% csrf_token %}
+    {{ form|bootstrap_horizontal }}
+    <div class="col-sm-10 col-sm-offset-2">
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </div>
+</form>
+<div class="col-lg-12">
+    <div class="table-responsive">
+        <table class="table table-responsive table-bordered table-hover table-striped tablesorter">
+            <thead>
+            <tr>
+                <th class="header"> Name <i class="icon-sort"></i></th>
+                <th class="header"> Year created <i class="icon-sort"></i></th>
+                <th class="header"> Version <i class="icon-sort"></i>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for camera in object_list %}
+                <tr>
+                    <td>{{ camera.name }}</td>
+                    <td>{{ camera.year_created }}</td>
+                    <td>{{ camera.version }}</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

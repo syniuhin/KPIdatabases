@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, \
-  HttpResponseBadRequest
+  HttpResponseBadRequest, Http404
 
 from django.core.urlresolvers import reverse
+from django.views.generic.edit import FormMixin
 from django.views.generic.list import ListView
 from django.utils import timezone
 
-from .forms import PhotoForm
-from .db import edit_photo_single, delete_photo_by_id, insert_into_photo_single, \
-  select_all_photo, select_photo_by_id
+from .forms import PhotoForm, CameraAttributesForm
+from .db import *
 
 
 def index(request):
@@ -44,7 +44,6 @@ def edit_photo(request, photo_id):
   photo_id = int(photo_id)
   if request.method == 'GET':
     photo = select_photo_by_id(photo_id)
-    print photo.__dict__
     form = PhotoForm(photo.__dict__)
     return render(request, 'lab02/photo_form.html', {'form': form})
   elif request.method == 'POST':
@@ -72,3 +71,53 @@ class PhotoListView(ListView):
 
   def get_queryset(self):
     return select_all_photo(None)
+
+
+class FormListView(FormMixin, ListView):
+  def get(self, request, *args, **kwargs):
+    # From ProcessFormMixin
+    form_class = self.get_form_class()
+    self.form = self.get_form(form_class)
+
+    # From BaseListView
+    self.object_list = self.get_queryset()
+    allow_empty = self.get_allow_empty()
+    if not allow_empty and len(self.object_list) == 0:
+      raise Http404(u"Empty list and '%(class_name)s.allow_empty' is False."
+                    % {'class_name': self.__class__.__name__})
+
+    context = self.get_context_data(object_list=self.object_list,
+                                    form=self.form)
+    return self.render_to_response(context)
+
+  def post(self, request, *args, **kwargs):
+    # From ProcessFormMixin
+    self.form = CameraAttributesForm(request.POST)
+    if (self.form.is_valid()):
+      self.cleaned_data = self.form.cleaned_data
+
+    # From BaseListView
+    self.object_list = self.get_queryset()
+    allow_empty = self.get_allow_empty()
+    if not allow_empty and len(self.object_list) == 0:
+      raise Http404(u"Empty list and '%(class_name)s.allow_empty' is False."
+                    % {'class_name': self.__class__.__name__})
+
+    context = self.get_context_data(object_list=self.object_list,
+                                    form=self.form)
+    return self.render_to_response(context)
+
+
+class FilterCameraListView(FormListView):
+  form_class = CameraAttributesForm
+  template_name = 'lab02/camera_list_filtered.html'
+
+  def get_context_data(self, **kwargs):
+    context = super(FilterCameraListView, self).get_context_data(**kwargs)
+    context['now'] = timezone.now()
+    return context
+
+  def get_queryset(self):
+    if hasattr(self, 'cleaned_data'):
+      return select_filter_camera(self.cleaned_data)
+    return select_all_camera()

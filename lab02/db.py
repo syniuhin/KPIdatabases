@@ -3,7 +3,7 @@ from django.http import HttpResponse
 import MySQLdb as mdb
 import time
 
-from .fake_models import Photo
+from .fake_models import Camera, Photo
 
 mdb_args = ('localhost', 'root', '***REMOVED***', 'lab02db')
 
@@ -304,13 +304,33 @@ def delete_photo_by_id(photo_id):
     cur.execute('DELETE FROM Photo WHERE id = %d' % photo_id)
 
 
-def select_all_camera(request):
+def select_all_camera():
   con = mdb.connect(*mdb_args)
   with con:
     cur = con.cursor()
     cur.execute('SELECT * FROM Camera')
     rows = cur.fetchall()
-  return HttpResponse(map(lambda row: str(row) + '\n', rows))
+  return map(lambda row: Camera(*row), rows)
+
+
+def select_filter_camera(args_dict):
+  where = []
+  if 'date_created_from' in args_dict and args_dict['date_created_from']:
+    where.append('year_created >= \'%s\'' % args_dict['date_created_from'])
+  if 'date_created_to' in args_dict and args_dict['date_created_to']:
+    where.append('year_created <= \'%s\'' % args_dict['date_created_to'])
+  if 'version' in args_dict and args_dict['version']:
+    where.append('version = %d' % args_dict['version'])
+  if len(where) == 0:
+    return select_all_camera()
+  con = mdb.connect(*mdb_args)
+  with con:
+    cur = con.cursor()
+    print where
+    print ' AND '.join(where)
+    cur.execute('SELECT * FROM Camera WHERE %s' % ' AND '.join(where))
+    rows = cur.fetchall()
+  return map(lambda row: Camera(*row), rows)
 
 
 def select_distinct_camera():
