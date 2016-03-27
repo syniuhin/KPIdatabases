@@ -7,7 +7,7 @@ from django.views.generic.edit import FormMixin
 from django.views.generic.list import ListView
 from django.utils import timezone
 
-from .forms import PhotoForm, CameraAttributesForm
+from .forms import *
 from .db import *
 
 
@@ -90,9 +90,9 @@ class FormListView(FormMixin, ListView):
                                     form=self.form)
     return self.render_to_response(context)
 
-  def post(self, request, *args, **kwargs):
+  def post(self, request):
     # From ProcessFormMixin
-    self.form = CameraAttributesForm(request.POST)
+    self.form = self.get_form_class()(request.POST)
     if (self.form.is_valid()):
       self.cleaned_data = self.form.cleaned_data
 
@@ -121,3 +121,18 @@ class FilterCameraListView(FormListView):
     if hasattr(self, 'cleaned_data'):
       return select_filter_camera(self.cleaned_data)
     return select_all_camera()
+
+
+class FilterLocationListView(FormListView):
+  form_class = LocationAttributesForm
+  template_name = 'lab02/location_list_filtered.html'
+
+  def get_context_data(self, **kwargs):
+    context = super(FilterLocationListView, self).get_context_data(**kwargs)
+    context['now'] = timezone.now()
+    return context
+
+  def get_queryset(self):
+    if hasattr(self, 'cleaned_data'):
+      return select_filter_location(self.cleaned_data)
+    return select_all_location()

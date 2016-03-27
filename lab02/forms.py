@@ -24,3 +24,9 @@ class CameraAttributesForm(forms.Form):
   date_created_from = forms.DateField(label='From', required=False)
   date_created_to = forms.DateField(label='To', required=False)
   version = forms.IntegerField(label='Version', required=False)
+
+
+class LocationAttributesForm(forms.Form):
+  accessible = forms.BooleanField(label='Accessible', required=False)
+  lat = forms.FloatField(label='Latitude', required=False)
+  lng = forms.FloatField(label='Longitude', required=False)

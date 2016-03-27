@@ -3,7 +3,7 @@ from django.http import HttpResponse
 import MySQLdb as mdb
 import time
 
-from .fake_models import Camera, Photo
+from .fake_models import *
 
 mdb_args = ('localhost', 'root', '***REMOVED***', 'lab02db')
 
@@ -326,8 +326,6 @@ def select_filter_camera(args_dict):
   con = mdb.connect(*mdb_args)
   with con:
     cur = con.cursor()
-    print where
-    print ' AND '.join(where)
     cur.execute('SELECT * FROM Camera WHERE %s' % ' AND '.join(where))
     rows = cur.fetchall()
   return map(lambda row: Camera(*row), rows)
@@ -342,13 +340,35 @@ def select_distinct_camera():
   return ((None, 'None'),) + rows
 
 
-def select_all_location(request):
+def select_all_location():
   con = mdb.connect(*mdb_args)
   with con:
     cur = con.cursor()
     cur.execute('SELECT * FROM Location')
     rows = cur.fetchall()
-  return HttpResponse(map(lambda row: str(row) + '\n', rows))
+  return map(lambda row: Location(*row), rows)
+
+
+def select_filter_location(args_dict):
+  where = []
+  if args_dict['lat']:
+    where.append('(lat BETWEEN %f AND %f)' %
+                 (args_dict['lat'] - .01, args_dict['lat'] + .01))
+  if args_dict['lng']:
+    where.append('(lng BETWEEN %f AND %f)' %
+                 (args_dict['lng'] - .01, args_dict['lng'] + .01))
+  if args_dict['accessible']:
+    where.append('(`accessible` = %r)' % args_dict['accessible'])
+  else:
+    where.append('(`accessible` = False)')
+  if len(where) == 0:
+    return select_all_location()
+  con = mdb.connect(*mdb_args)
+  with con:
+    cur = con.cursor()
+    cur.execute('SELECT * FROM Location WHERE %s' % ' AND '.join(where))
+    rows = cur.fetchall()
+  return map(lambda row: Location(*row), rows)
 
 
 def select_distinct_location():

@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from . import db, views
-from .views import FilterCameraListView, PhotoListView
+from .views import *
 
 urlpatterns = [
   url(r'^$', views.index, name='index'),
@@ -9,7 +9,7 @@ urlpatterns = [
   url(r'^camera/load/?$', db.initiate_insert_into_camera, name='camera_insert'),
   url(r'^camera/list/all/?$', db.select_all_camera, name='camera_select_all'),
   url(r'^camera/list/filter/$', FilterCameraListView.as_view(),
-      name='photo_list'),
+      name='camera_list_filter'),
   url(r'^photographer/create/?$', db.create_photographer,
       name='photographer_create'),
   url(r'^photographer/load/?$', db.initiate_insert_into_photographer,
@@ -21,6 +21,8 @@ urlpatterns = [
       name='location_insert'),
   url(r'^location/list/all/?$', db.select_all_location,
       name='location_select_all'),
+  url(r'^location/list/filter/$', FilterLocationListView.as_view(),
+      name='location_list_filter'),
   url(r'^photographer_camera/create/?$', db.create_photographer_camera,
       name='photographer_camera_create'),
   url(r'^photographer_camera/load/?$',

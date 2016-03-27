@@ -24,3 +24,20 @@ class Camera:
     self.name = name
     self.year_created = year_created
     self.version = version
+
+
+class Location:
+  def __init__(self, loc_id, name, lat, lng, accessible):
+    self.id = loc_id
+    self.name = name
+    self.lat = lat
+    self.lng = lng
+    self.accessible = accessible
+
+
+class Photographer:
+  def __init__(self, ph_id, name, level, email):
+    self.id = ph_id
+    self.name = name
+    self.level = level
+    self.email = email
