@@ -8,6 +8,29 @@ from .fake_models import *
 mdb_args = ('localhost', 'root', '***REMOVED***', 'lab02db')
 
 
+def create_tables(request):
+  create_camera(request)
+  create_location(request)
+  create_photographer(request)
+  create_photographer_camera(request)
+  create_photographer_location(request)
+  create_photo(request)
+  return HttpResponse('Tables created')
+
+
+def drop_tables(request):
+  con = mdb.connect(*mdb_args)
+  with con:
+    cur = con.cursor()
+    cur.execute('DROP TABLE IF EXISTS `lab02db`.`Photo`')
+    cur.execute('DROP TABLE IF EXISTS `lab02db`.`PhotographerCamera`')
+    cur.execute('DROP TABLE IF EXISTS `lab02db`.`PhotographerLocation`')
+    cur.execute('DROP TABLE IF EXISTS `lab02db`.`Photographer`')
+    cur.execute('DROP TABLE IF EXISTS `lab02db`.`Camera`')
+    cur.execute('DROP TABLE IF EXISTS `lab02db`.`Location`')
+  return HttpResponse('Tables dropped')
+
+
 def create_camera(request):
   con = mdb.connect(*mdb_args)
   with con:
@@ -159,6 +182,15 @@ def create_photo(request):
       ENGINE = MyISAM
       """)
   return HttpResponse('Photo created')
+
+
+def initiate_insert_into_tables(request):
+  initiate_insert_into_camera(request)
+  initiate_insert_into_location(request)
+  initiate_insert_into_photographer(request)
+  initiate_insert_into_photographer_camera(request)
+  initiate_insert_into_photographer_location(request)
+  return HttpResponse('Tables loaded')
 
 
 def initiate_insert_into_camera(request):

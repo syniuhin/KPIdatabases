@@ -5,6 +5,9 @@ from .views import *
 
 urlpatterns = [
   url(r'^$', views.index, name='index'),
+  url(r'^tables/create/?$', db.create_tables, name='create_tables'),
+  url(r'^tables/drop/?$', db.drop_tables, name='drop_tables'),
+  url(r'^tables/load/?$', db.initiate_insert_into_tables, name='load_tables'),
   url(r'^camera/create/?$', db.create_camera, name='camera_create'),
   url(r'^camera/load/?$', db.initiate_insert_into_camera, name='camera_insert'),
   # url(r'^camera/list/all/?$', db.select_all_camera, name='camera_select_all'),
