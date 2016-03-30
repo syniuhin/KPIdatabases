@@ -304,7 +304,7 @@ def delete_photo_by_id(photo_id):
     cur.execute('DELETE FROM Photo WHERE id = %d' % photo_id)
 
 
-def select_all_camera():
+def select_all_camera(request):
   con = mdb.connect(*mdb_args)
   with con:
     cur = con.cursor()
@@ -322,7 +322,7 @@ def select_filter_camera(args_dict):
   if 'version' in args_dict and args_dict['version']:
     where.append('version = %d' % args_dict['version'])
   if len(where) == 0:
-    return select_all_camera()
+    return select_all_camera(None)
   con = mdb.connect(*mdb_args)
   with con:
     cur = con.cursor()
@@ -340,7 +340,7 @@ def select_distinct_camera():
   return ((None, 'None'),) + rows
 
 
-def select_all_location():
+def select_all_location(request):
   con = mdb.connect(*mdb_args)
   with con:
     cur = con.cursor()
@@ -362,7 +362,7 @@ def select_filter_location(args_dict):
   else:
     where.append('(`accessible` = False)')
   if len(where) == 0:
-    return select_all_location()
+    return select_all_location(None)
   con = mdb.connect(*mdb_args)
   with con:
     cur = con.cursor()
@@ -380,7 +380,7 @@ def select_distinct_location():
   return ((None, 'None'),) + rows
 
 
-def select_all_photographer():
+def select_all_photographer(request):
   con = mdb.connect(*mdb_args)
   with con:
     cur = con.cursor()
@@ -398,7 +398,7 @@ def select_filter_photographer(args_dict):
   if 'level_to' in args_dict and args_dict['level_to']:
     where.append('level <= %d' % args_dict['level_to'])
   if len(where) == 0:
-    return select_all_photographer()
+    return select_all_photographer(None)
   con = mdb.connect(*mdb_args)
   with con:
     cur = con.cursor()

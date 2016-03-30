@@ -120,7 +120,7 @@ class FilterCameraListView(FormListView):
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):
       return select_filter_camera(self.cleaned_data)
-    return select_all_camera()
+    return select_all_camera(None)
 
 
 class FilterLocationListView(FormListView):
@@ -135,7 +135,7 @@ class FilterLocationListView(FormListView):
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):
       return select_filter_location(self.cleaned_data)
-    return select_all_location()
+    return select_all_location(None)
 
 
 class FilterPhotographerListView(FormListView):
@@ -150,7 +150,7 @@ class FilterPhotographerListView(FormListView):
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):
       return select_filter_photographer(self.cleaned_data)
-    return select_all_photographer()
+    return select_all_photographer(None)
 
 
 class FilterPhotoListView(FormListView):
