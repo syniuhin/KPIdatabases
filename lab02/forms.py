@@ -38,8 +38,8 @@ class LocationAttributesForm(forms.Form):
 
 
 class PhotographerAttributesForm(forms.Form):
-  name = forms.ChoiceField(label='Name', required=False,
-                           choices=(((None, 'None'),) +
-                                    select_distinct_photographer()))
+  photographer_id = forms.ChoiceField(label='Name', required=False,
+                                      choices=(((None, 'None'),) +
+                                               select_distinct_photographer()))
   level_from = forms.IntegerField(label='Level from', required=False)
   level_to = forms.IntegerField(label='Level to', required=False)

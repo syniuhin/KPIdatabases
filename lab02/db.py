@@ -423,8 +423,8 @@ def select_all_photographer(request):
 
 def select_filter_photographer(args_dict):
   where = []
-  if args_dict['name']:
-    where.append('name = \'%s\'' % args_dict['name'])
+  if args_dict['photographer_id']:
+    where.append('id = %s' % args_dict['photographer_id'])
   if 'level_from' in args_dict and args_dict['level_from']:
     where.append('level >= %d' % args_dict['level_from'])
   if 'level_to' in args_dict and args_dict['level_to']:

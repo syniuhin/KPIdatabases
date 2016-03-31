@@ -149,6 +149,7 @@ class FilterPhotographerListView(FormListView):
 
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):
+      print self.cleaned_data
       return select_filter_photographer(self.cleaned_data)
     return select_all_photographer(None)
 
