@@ -8,12 +8,15 @@ class Camera(models.Model):
   year_created = models.DateField()
   version = models.IntegerField()
 
+  class Meta:
+    unique_together = (('name', 'version'),)
+
   def __str__(self):
     return self.name.encode('utf-8')
 
 
 class Location(models.Model):
-  name = models.CharField(max_length=64)
+  name = models.CharField(max_length=64, unique=True)
   lat = models.FloatField(max_length=10)
   lng = models.FloatField(max_length=10)
   accessible = models.BooleanField()

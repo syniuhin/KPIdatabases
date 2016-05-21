@@ -19,12 +19,12 @@ class CameraAttributesForm(forms.Form):
     label='From', required=False, widget=forms.SelectDateWidget(
       years=sorted(map(lambda y: str(y).split('-')[0],
                        map(lambda c: c.year_created,
-                           Camera.objects.all())))))
+                           Camera.objects.all().iterator())))))
   date_created_to = forms.DateField(
     label='To', required=False, widget=forms.SelectDateWidget(
       years=sorted(map(lambda y: str(y).split('-')[0],
                        map(lambda c: c.year_created,
-                           Camera.objects.all())))))
+                           Camera.objects.all().iterator())))))
   version = forms.IntegerField(label='Version', required=False)
 
 
