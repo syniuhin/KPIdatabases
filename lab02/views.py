@@ -174,7 +174,24 @@ class FilterPhotographerListView(FormListView):
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):
       print self.cleaned_data
-      return Photographer.objects.filter(self.cleaned_data)
+      level_from = self.cleaned_data.get('level_from')
+      level_to = self.cleaned_data.get('level_to')
+      email_contains = self.cleaned_data.get('email_contains')
+      have_cameras = self.cleaned_data.get('have_cameras')
+      have_been_to = self.cleaned_data.get('have_been_to')
+
+      q = Q()
+      if level_from is not None:
+        q &= Q(level__gte=level_from)
+      if level_to is not None:
+        q &= Q(level__lte=level_to)
+      if email_contains is not None:
+        q &= Q(email__contains=email_contains)
+      if len(have_cameras) > 0:
+        q &= Q(cameras__in=have_cameras)
+      if len(have_been_to) > 0:
+        q &= Q(locations__in=have_been_to)
+      return Photographer.objects.filter(q)
     return Photographer.objects.all()
 
 

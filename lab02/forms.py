@@ -15,8 +15,16 @@ class PhotoSearchForm(forms.Form):
 
 
 class CameraAttributesForm(forms.Form):
-  date_created_from = forms.DateField(label='From', required=False)
-  date_created_to = forms.DateField(label='To', required=False)
+  date_created_from = forms.DateField(
+    label='From', required=False, widget=forms.SelectDateWidget(
+      years=sorted(map(lambda y: str(y).split('-')[0],
+                       map(lambda c: c.year_created,
+                           Camera.objects.all())))))
+  date_created_to = forms.DateField(
+    label='To', required=False, widget=forms.SelectDateWidget(
+      years=sorted(map(lambda y: str(y).split('-')[0],
+                       map(lambda c: c.year_created,
+                           Camera.objects.all())))))
   version = forms.IntegerField(label='Version', required=False)
 
 
@@ -29,7 +37,12 @@ class LocationAttributesForm(forms.Form):
 
 
 class PhotographerAttributesForm(forms.Form):
-  photographer_id = forms.ModelChoiceField(label="Photographer", required=False,
-                                           queryset=Photographer.objects.all())
   level_from = forms.IntegerField(label='Level from', required=False)
   level_to = forms.IntegerField(label='Level to', required=False)
+  email_contains = forms.CharField(label='Email contains', required=False)
+  have_cameras = forms.ModelMultipleChoiceField(
+    label='Have cameras', required=False,
+    queryset=Camera.objects.all())
+  have_been_to = forms.ModelMultipleChoiceField(
+    label='Have been to', required=False,
+    queryset=Location.objects.all())
