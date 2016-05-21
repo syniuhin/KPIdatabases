@@ -1,10 +1,11 @@
+from django.contrib import messages
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponseBadRequest, Http404
 from django.shortcuts import render
 from django.utils import timezone
 from django.views.generic.edit import FormMixin
 from django.views.generic.list import ListView
-from django.contrib import messages
 
 from .forms import *
 from .models import *
@@ -89,7 +90,7 @@ class FormListView(FormMixin, ListView):
   def post(self, request):
     # From ProcessFormMixin
     self.form = self.get_form_class()(request.POST)
-    if (self.form.is_valid()):
+    if self.form.is_valid():
       self.cleaned_data = self.form.cleaned_data
 
     # From BaseListView
@@ -115,7 +116,17 @@ class FilterCameraListView(FormListView):
 
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):
-      return Camera.objects.filter(self.cleaned_data)
+      date_created_from = self.cleaned_data.get('date_created_from')
+      date_created_to = self.cleaned_data.get('date_created_to')
+      version = self.cleaned_data.get('version')
+      q = Q()
+      if date_created_from is not None:
+        q = q | Q(year_created__gte=date_created_from)
+      if date_created_to is not None:
+        q = q | Q(year_created__lte=date_created_to)
+      if version is not None:
+        q = q | Q(version=version)
+      return Camera.objects.filter(q)
     return Camera.objects.all()
 
 
