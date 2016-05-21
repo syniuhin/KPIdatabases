@@ -21,7 +21,7 @@ class PhotoForm(forms.Form):
 
 
 class PhotoSearchForm(forms.Form):
-  name = forms.CharField(label='Photo name search', max_length=255,
+  name = forms.CharField(label='Search', max_length=255,
                          required=False)
 
 
