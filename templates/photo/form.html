@@ -19,14 +19,18 @@
         margin: 0 auto;
     }
 </style>
-<div class="container text-center">
-    <form class="form-photo" action="./" method="post">
-        {% load bootstrap %}
-        {% csrf_token %}
-        {{ form|bootstrap }}
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        <form action="./" method="post">
+            {% load bootstrap %}
+            {% csrf_token %}
+            {{ form|bootstrap }}
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+    </div>
+    <div class="col-lg-4"></div>
     </form>
 </div>
 </form>

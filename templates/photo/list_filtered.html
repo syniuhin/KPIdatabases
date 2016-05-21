@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Filter photos</title>
+    <title>Photo list</title>
     <script src="/static/jquery/dist/jquery.js"></script>
     <script type="text/javascript"
             src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -11,15 +11,8 @@
           href="/static/bootstrap/dist/css/bootstrap-theme.min.css">
 </head>
 <body>
-<style>
-    .form-photo {
-        max-width: 400px;
-        padding: 15px;
-        margin: 0 auto;
-    }
-</style>
-<h1 class="text-center">Photographer</h1>
-<form class="form-photo form-horizontal" action="." method="post">
+<h1 class="text-center">Photos</h1>
+<form action="../" method="post">
     {% load bootstrap %}
     {% csrf_token %}
     {{ form|bootstrap_horizontal }}
@@ -33,18 +26,27 @@
             <thead>
             <tr>
                 <th class="header"> Name <i class="icon-sort"></i></th>
-                <th class="header"> Level <i class="icon-sort"></i></th>
-                <th class="header"> Email <i class="icon-sort"></i>
+                <th class="header"> Photographer <i class="icon-sort"></i>
                 </th>
+                <th class="header"> Camera <i class="icon-sort"></i></th>
+                <th class="header"> Location <i class="icon-sort"></i>
+                </th>
+                <th class="header"> Aperture <i class="icon-sort"></i></th>
+                <th class="header"> ISO <i class="icon-sort"></i></th>
+                <th class="header"> Shot time <i class="icon-sort"></i></th>
             </tr>
             </thead>
             <tbody>
 
-            {% for photographer in object_list %}
+            {% for p in object_list %}
                 <tr>
-                    <td>{{ photographer.name }}</td>
-                    <td>{{ photographer.level }}</td>
-                    <td>{{ photographer.email }}</td>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.photographer_name }}</td>
+                    <td>{{ p.camera_name }}</td>
+                    <td>{{ p.location_name }}</td>
+                    <td>{{ p.aperture }}</td>
+                    <td>{{ p.iso }}</td>
+                    <td>{{ p.shot_time }}</td>
                 </tr>
             {% endfor %}
 

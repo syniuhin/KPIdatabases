@@ -1,18 +1,17 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect, \
-  HttpResponseBadRequest, Http404
-
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect, HttpResponseBadRequest, Http404
+from django.shortcuts import render
+from django.utils import timezone
 from django.views.generic.edit import FormMixin
 from django.views.generic.list import ListView
-from django.utils import timezone
+from django.contrib import messages
 
 from .forms import *
-from .db import *
+from .models import *
 
 
 def index(request):
-  return HttpResponse('Hey!')
+  return HttpResponseRedirect('/photo/list')
 
 
 def on_click_photo(request):
@@ -28,49 +27,46 @@ def on_click_photo(request):
   return HttpResponseBadRequest()
 
 
-def new_photo(request):
-  if request.method == 'POST':
-    form = PhotoForm(request.POST)
-    if form.is_valid():
-      insert_into_photo_single(form.cleaned_data)
-      return HttpResponseRedirect('/lab02/photo/list/all/')
-  else:
-    form = PhotoForm()
+class PhotoController:
+  @staticmethod
+  def create(request):
+    if request.method == 'GET':
+      form = PhotoForm()
+    elif request.method == 'POST':
+      form = PhotoForm(request.POST)
+      if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/photo/list/')
+    return render(request, 'photo/form.html', {'form': form})
 
-  return render(request, 'lab02/photo_form.html', {'form': form})
+  @staticmethod
+  def update(request, photo_id):
+    photo = Photo.objects.get(pk=photo_id)
+    if request.method == 'GET':
+      form = PhotoForm(instance=photo)
+    elif request.method == 'POST':
+      form = PhotoForm(request.POST, instance=photo)
+      if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/photo/list/')
+    return render(request, 'photo/form.html', {'form': form})
 
-
-def edit_photo(request, photo_id):
-  photo_id = int(photo_id)
-  if request.method == 'GET':
-    photo = select_photo_by_id(photo_id)
-    form = PhotoForm(photo.__dict__)
-    return render(request, 'lab02/photo_form.html', {'form': form})
-  elif request.method == 'POST':
-    form = PhotoForm(request.POST)
-    if form.is_valid():
-      photo_dict = form.cleaned_data
-      photo_dict.update({'id': photo_id})
-      edit_photo_single(photo_dict)
-      return HttpResponseRedirect('/lab02/photo/list/all/')
-
-
-def delete_photo(request, photo_id):
-  photo_id = int(photo_id)
-  delete_photo_by_id(photo_id)
-  return HttpResponseRedirect('/lab02/photo/list/all/')
+  @staticmethod
+  def delete(request, photo_id):
+    photo = Photo.objects.get(pk=photo_id)
+    messages.add_message(request, messages.WARNING, )
+    photo.delete()
+    return HttpResponseRedirect('/photo/list/')
 
 
 class PhotoListView(ListView):
-  template_name = 'lab02/photo_list.html'
+  template_name = 'photo/list.html'
+  model = Photo
 
   def get_context_data(self, **kwargs):
     context = super(PhotoListView, self).get_context_data(**kwargs)
     context['now'] = timezone.now()
     return context
-
-  def get_queryset(self):
-    return select_all_photo(None)
 
 
 class FormListView(FormMixin, ListView):
@@ -110,7 +106,7 @@ class FormListView(FormMixin, ListView):
 
 class FilterCameraListView(FormListView):
   form_class = CameraAttributesForm
-  template_name = 'lab02/camera_list_filtered.html'
+  template_name = 'camera/list_filtered.html'
 
   def get_context_data(self, **kwargs):
     context = super(FilterCameraListView, self).get_context_data(**kwargs)
@@ -119,13 +115,13 @@ class FilterCameraListView(FormListView):
 
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):
-      return select_filter_camera(self.cleaned_data)
-    return select_all_camera(None)
+      return Camera.objects.filter(self.cleaned_data)
+    return Camera.objects.all()
 
 
 class FilterLocationListView(FormListView):
   form_class = LocationAttributesForm
-  template_name = 'lab02/location_list_filtered.html'
+  template_name = 'location/list_filtered.html'
 
   def get_context_data(self, **kwargs):
     context = super(FilterLocationListView, self).get_context_data(**kwargs)
@@ -134,13 +130,13 @@ class FilterLocationListView(FormListView):
 
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):
-      return select_filter_location(self.cleaned_data)
-    return select_all_location(None)
+      return Location.objects.filter(self.cleaned_data)
+    return Location.objects.all()
 
 
 class FilterPhotographerListView(FormListView):
   form_class = PhotographerAttributesForm
-  template_name = 'lab02/photographer_list_filtered.html'
+  template_name = 'photographer/list_filtered.html'
 
   def get_context_data(self, **kwargs):
     context = super(FilterPhotographerListView, self).get_context_data(**kwargs)
@@ -150,13 +146,13 @@ class FilterPhotographerListView(FormListView):
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):
       print self.cleaned_data
-      return select_filter_photographer(self.cleaned_data)
-    return select_all_photographer(None)
+      return Photographer.objects.filter(self.cleaned_data)
+    return Photographer.objects.all()
 
 
 class FilterPhotoListView(FormListView):
   form_class = PhotoSearchForm
-  template_name = 'lab02/photo_list_filtered.html'
+  template_name = 'photo/list_filtered.html'
 
   def get_context_data(self, **kwargs):
     context = super(FilterPhotoListView, self).get_context_data(**kwargs)
@@ -165,5 +161,5 @@ class FilterPhotoListView(FormListView):
 
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):
-      return select_filter_photo(self.cleaned_data)
-    return select_all_photo(None)
+      return Photo.objects.filter(self.cleaned_data)
+    return Photo.objects.get()

@@ -18,8 +18,8 @@
         margin: 0 auto;
     }
 </style>
-<h1 class="text-center">Camera</h1>
-<form class="form-photo form-horizontal" action="." method="post">
+<h1 class="text-center">Photographer</h1>
+<form class="form-photo form-horizontal" action="lab02" method="post">
     {% load bootstrap %}
     {% csrf_token %}
     {{ form|bootstrap_horizontal }}
@@ -33,18 +33,18 @@
             <thead>
             <tr>
                 <th class="header"> Name <i class="icon-sort"></i></th>
-                <th class="header"> Year created <i class="icon-sort"></i></th>
-                <th class="header"> Version <i class="icon-sort"></i>
+                <th class="header"> Level <i class="icon-sort"></i></th>
+                <th class="header"> Email <i class="icon-sort"></i>
                 </th>
             </tr>
             </thead>
             <tbody>
 
-            {% for camera in object_list %}
+            {% for photographer in object_list %}
                 <tr>
-                    <td>{{ camera.name }}</td>
-                    <td>{{ camera.year_created }}</td>
-                    <td>{{ camera.version }}</td>
+                    <td>{{ photographer.name }}</td>
+                    <td>{{ photographer.level }}</td>
+                    <td>{{ photographer.email }}</td>
                 </tr>
             {% endfor %}
 

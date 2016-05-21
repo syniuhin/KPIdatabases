@@ -1,23 +1,12 @@
-import datetime
 from django import forms
 
-from .db import select_distinct_camera, select_distinct_location, \
-  select_distinct_photographer
+from .models import *
 
 
-class PhotoForm(forms.Form):
-  name = forms.CharField(label='Photo name', max_length=255,
-                         required=False)
-  photographer_id = forms.ChoiceField(label='Photographer',
-                                      choices=select_distinct_photographer)
-  camera_id = forms.ChoiceField(label='Camera', required=False,
-                                choices=select_distinct_camera)
-  location_id = forms.ChoiceField(label='Location', required=False,
-                                  choices=select_distinct_location)
-  aperture = forms.FloatField(label='Aperture', required=False)
-  iso = forms.IntegerField(label='ISO', required=False)
-  shot_time = forms.DateTimeField(label='Shot time',
-                                  initial=datetime.datetime.now)
+class PhotoForm(forms.ModelForm):
+  class Meta:
+    model = Photo
+    exclude = []
 
 
 class PhotoSearchForm(forms.Form):
@@ -38,8 +27,7 @@ class LocationAttributesForm(forms.Form):
 
 
 class PhotographerAttributesForm(forms.Form):
-  photographer_id = forms.ChoiceField(label='Name', required=False,
-                                      choices=(((None, 'None'),) +
-                                               select_distinct_photographer()))
+  photographer_id = forms.ModelChoiceField(label="Photographer", required=False,
+                                           queryset=Photographer.objects.all())
   level_from = forms.IntegerField(label='Level from', required=False)
   level_to = forms.IntegerField(label='Level to', required=False)

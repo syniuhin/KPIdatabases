@@ -18,8 +18,8 @@
         margin: 0 auto;
     }
 </style>
-<h1 class="text-center">Location</h1>
-<form class="form-photo form-horizontal" action="." method="post">
+<h1 class="text-center">Camera</h1>
+<form class="form-photo form-horizontal" action="lab02" method="post">
     {% load bootstrap %}
     {% csrf_token %}
     {{ form|bootstrap_horizontal }}
@@ -33,20 +33,18 @@
             <thead>
             <tr>
                 <th class="header"> Name <i class="icon-sort"></i></th>
-                <th class="header"> Latitude <i class="icon-sort"></i></th>
-                <th class="header"> Longitude <i class="icon-sort"></i>
-                <th class="header"> Accessible <i class="icon-sort"></i>
+                <th class="header"> Year created <i class="icon-sort"></i></th>
+                <th class="header"> Version <i class="icon-sort"></i>
                 </th>
             </tr>
             </thead>
             <tbody>
 
-            {% for location in object_list %}
+            {% for camera in object_list %}
                 <tr>
-                    <td>{{ location.name }}</td>
-                    <td>{{ location.lat }}</td>
-                    <td>{{ location.lng }}</td>
-                    <td>{{ location.accessible }}</td>
+                    <td>{{ camera.name }}</td>
+                    <td>{{ camera.year_created }}</td>
+                    <td>{{ camera.version }}</td>
                 </tr>
             {% endfor %}
 
