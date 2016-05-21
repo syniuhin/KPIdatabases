@@ -11,15 +11,9 @@
           href="/static/bootstrap/dist/css/bootstrap-theme.min.css">
 </head>
 <body>
-<style>
-    .form-photo {
-        max-width: 400px;
-        padding: 15px;
-        margin: 0 auto;
-    }
-</style>
 <h1 class="text-center">Location</h1>
-<form class="form-horizontal" action="/location/list/filter" method="post">
+<form class="form-horizontal text-center" action="/location/list/filter"
+      method="post" style="margin: 20px;">
     {% load bootstrap %}
     {% csrf_token %}
     {{ form }}

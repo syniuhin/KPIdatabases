@@ -21,8 +21,10 @@ class CameraAttributesForm(forms.Form):
 
 
 class LocationAttributesForm(forms.Form):
-  lat = forms.FloatField(label='Latitude', required=False)
-  lng = forms.FloatField(label='Longitude', required=False)
+  lat_from = forms.FloatField(label='Latitude from', required=False)
+  lng_from = forms.FloatField(label='Longitude from', required=False)
+  lat_to = forms.FloatField(label='Latitude to', required=False)
+  lng_to = forms.FloatField(label='Longitude to', required=False)
   accessible = forms.BooleanField(label='Accessible', required=False)
 
 

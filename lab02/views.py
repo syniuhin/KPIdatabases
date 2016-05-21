@@ -121,11 +121,11 @@ class FilterCameraListView(FormListView):
       version = self.cleaned_data.get('version')
       q = Q()
       if date_created_from is not None:
-        q = q | Q(year_created__gte=date_created_from)
+        q = q & Q(year_created__gte=date_created_from)
       if date_created_to is not None:
-        q = q | Q(year_created__lte=date_created_to)
+        q = q & Q(year_created__lte=date_created_to)
       if version is not None:
-        q = q | Q(version=version)
+        q = q & Q(version=version)
       return Camera.objects.filter(q)
     return Camera.objects.all()
 
@@ -141,7 +141,24 @@ class FilterLocationListView(FormListView):
 
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):
-      return Location.objects.filter(**self.cleaned_data)
+      lat_from = self.cleaned_data.get('lat_from')
+      lng_from = self.cleaned_data.get('lng_from')
+
+      lat_to = self.cleaned_data.get('lat_to')
+      lng_to = self.cleaned_data.get('lng_to')
+
+      accessible = self.cleaned_data.get('accessible')
+      q = Q()
+      if lat_from is not None:
+        q = q & Q(lat__gte=lat_from)
+      if lng_from is not None:
+        q = q & Q(lng__gte=lng_from)
+      if lat_to is not None:
+        q = q & Q(lat__lte=lat_to)
+      if lng_to is not None:
+        q = q & Q(lng__lte=lng_to)
+      q = q & Q(accessible=accessible)
+      return Location.objects.filter(q)
     return Location.objects.all()
 
 
