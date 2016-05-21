@@ -19,13 +19,11 @@
     }
 </style>
 <h1 class="text-center">Location</h1>
-<form class="form-photo form-horizontal" action="lab02" method="post">
+<form class="form-horizontal" action="/location/list/filter" method="post">
     {% load bootstrap %}
     {% csrf_token %}
-    {{ form|bootstrap_horizontal }}
-    <div class="col-sm-10 col-sm-offset-2">
-        <button type="submit" class="btn btn-primary">Filter</button>
-    </div>
+    {{ form }}
+    <button type="submit" class="btn btn-xs">Filter</button>
 </form>
 <div class="col-lg-12">
     <div class="table-responsive">

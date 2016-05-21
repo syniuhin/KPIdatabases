@@ -141,7 +141,7 @@ class FilterLocationListView(FormListView):
 
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):
-      return Location.objects.filter(self.cleaned_data)
+      return Location.objects.filter(**self.cleaned_data)
     return Location.objects.all()
 
 

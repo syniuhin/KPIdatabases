@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a01eb310-c6f6-4c56-aba9-5fd4cdfac0fc" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab02/urls.py" afterPath="$PROJECT_DIR$/lab02/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab02/db.py" afterPath="$PROJECT_DIR$/lab02/db.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab02/models.py" afterPath="$PROJECT_DIR$/lab02/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab02/views.py" afterPath="$PROJECT_DIR$/lab02/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/camera/list_filtered.html" afterPath="$PROJECT_DIR$/templates/camera/list_filtered.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/location/list_filtered.html" afterPath="$PROJECT_DIR$/templates/location/list_filtered.html" />
     </list>
     <ignored path="django_project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,33 +40,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/django_project/settings.py">
+      <file leaf-file-name="db.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lab02/db.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="82" column="24" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/django_project/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lab02/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+            <state relative-caret-position="243">
+              <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
               <folding>
-                <element signature="e#0#32#0" expanded="true" />
+                <marker date="1463837028000" expanded="true" signature="2079:2178" placeholder="INSERT INTO `lab02db`.`lab02_photographer_cameras`... " />
+                <marker date="1463837028000" expanded="true" signature="2729:2832" placeholder="INSERT INTO `lab02db`.`lab02_photographer_locations(photographer_id, location_id)`... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lab02/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="211">
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,61 +68,10 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lab02/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="126" column="16" selection-start-line="126" selection-start-column="16" selection-end-line="126" selection-end-column="16" />
+            <state relative-caret-position="429">
+              <caret line="142" column="28" selection-start-line="142" selection-start-column="28" selection-end-line="142" selection-end-column="28" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="db.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lab02/db.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-                <marker date="1463831345000" expanded="true" signature="965:984" placeholder="INSERT INTO Camera... " />
-                <marker date="1463831345000" expanded="true" signature="965:1012" placeholder="INSERT INTO Camera... " />
-                <marker date="1463831345000" expanded="true" signature="965:1040" placeholder="INSERT INTO " />
-                <marker date="1463831345000" expanded="true" signature="965:1043" placeholder="INSERT INTO missing_value... " />
-                <marker date="1463831345000" expanded="true" signature="1533:1614" placeholder="INSERT INTO Location... " />
-                <marker date="1463831345000" expanded="true" signature="2120:2199" placeholder="INSERT INTO Photographer... " />
-                <marker date="1463831345000" expanded="true" signature="2749:2848" placeholder="INSERT INTO PhotographerCamera... " />
-                <marker date="1463831345000" expanded="true" signature="3406:3509" placeholder="INSERT INTO PhotographerLocation" />
-                <marker date="1463831345000" expanded="true" signature="3663:3683" placeholder="SELECT * FRO... Camera" />
-                <marker date="1463831345000" expanded="true" signature="4353:4380" placeholder="SELECT * FRO... Camera" />
-                <marker date="1463831345000" expanded="true" signature="4597:4619" placeholder="SELECT * FRO... Location" />
-                <marker date="1463831345000" expanded="true" signature="5308:5337" placeholder="SELECT * FRO... Location" />
-                <marker date="1463831345000" expanded="true" signature="5560:5586" placeholder="SELECT * FRO... Photographer" />
-                <marker date="1463831345000" expanded="true" signature="6194:6227" placeholder="SELECT * FRO... Photographer" />
-                <marker date="1463831345000" expanded="true" signature="6469:7140" placeholder="SELECT photo... Photo" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="list_filtered.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/camera/list_filtered.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-              <folding>
-                <element signature="n#style#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lab02/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="17" column="66" selection-start-line="17" selection-start-column="66" selection-end-line="17" selection-end-column="66" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -160,15 +105,16 @@
         <option value="$PROJECT_DIR$/templates/lab02/photo_list.html" />
         <option value="$PROJECT_DIR$/templates/lab02/photo_form.html" />
         <option value="$PROJECT_DIR$/templates/lab02/photo_list_filtered.html" />
-        <option value="$PROJECT_DIR$/lab02/models.py" />
         <option value="$PROJECT_DIR$/django_project/urls.py" />
         <option value="$PROJECT_DIR$/templates/photo/list.html" />
         <option value="$PROJECT_DIR$/templates/photo/form.html" />
-        <option value="$PROJECT_DIR$/lab02/db.py" />
-        <option value="$PROJECT_DIR$/lab02/urls.py" />
-        <option value="$PROJECT_DIR$/lab02/views.py" />
         <option value="$PROJECT_DIR$/lab02/forms.py" />
+        <option value="$PROJECT_DIR$/lab02/views.py" />
+        <option value="$PROJECT_DIR$/templates/location/list_filtered.html" />
+        <option value="$PROJECT_DIR$/lab02/urls.py" />
         <option value="$PROJECT_DIR$/templates/camera/list_filtered.html" />
+        <option value="$PROJECT_DIR$/lab02/models.py" />
+        <option value="$PROJECT_DIR$/lab02/db.py" />
       </list>
     </option>
   </component>
@@ -256,6 +202,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="location" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="camera" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -294,7 +258,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../lab02/venv" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -694,7 +658,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5032841" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41409692" sideWeight="0.49671593" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41409692" sideWeight="0.49671593" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19622332" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -772,22 +736,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lab02/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2384">
-          <caret line="159" column="35" selection-start-line="159" selection-start-column="35" selection-end-line="159" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lab02/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="36" column="47" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/photo/list_filtered.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
@@ -817,22 +765,7 @@
         <state relative-caret-position="3216">
           <caret line="206" column="11" selection-start-line="206" selection-start-column="11" selection-end-line="206" selection-end-column="11" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <marker date="1463831345000" expanded="true" signature="965:984" placeholder="INSERT INTO Camera... " />
-            <marker date="1463831345000" expanded="true" signature="965:1012" placeholder="INSERT INTO Camera... " />
-            <marker date="1463831345000" expanded="true" signature="965:1040" placeholder="INSERT INTO " />
-            <marker date="1463831345000" expanded="true" signature="965:1043" placeholder="INSERT INTO missing_value... " />
-            <marker date="1463831345000" expanded="true" signature="1533:1614" placeholder="INSERT INTO Location... " />
-            <marker date="1463831345000" expanded="true" signature="2120:2199" placeholder="INSERT INTO Photographer... " />
-            <marker date="1463831345000" expanded="true" signature="2749:2848" placeholder="INSERT INTO PhotographerCamera... " />
-            <marker date="1463831345000" expanded="true" signature="3406:3509" placeholder="INSERT INTO PhotographerLocation" />
-            <marker date="1463831345000" expanded="true" signature="3663:3683" placeholder="SELECT * FRO... Camera" />
-            <marker date="1463831345000" expanded="true" signature="4353:4380" placeholder="SELECT * FRO... Camera" />
-            <marker date="1463831345000" expanded="true" signature="4597:4619" placeholder="SELECT * FRO... Location" />
-            <marker date="1463831345000" expanded="true" signature="5308:5337" placeholder="SELECT * FRO... Location" />
-            <marker date="1463831345000" expanded="true" signature="5560:5586" placeholder="SELECT * FRO... Photographer" />
-            <marker date="1463831345000" expanded="true" signature="6194:6227" placeholder="SELECT * FRO... Photographer" />
-            <marker date="1463831345000" expanded="true" signature="6469:7140" placeholder="SELECT photo... Photo" />
+            <element signature="e#0#21#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -841,9 +774,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="752">
           <caret line="50" column="29" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -892,22 +823,7 @@
         <state relative-caret-position="2816">
           <caret line="181" column="0" selection-start-line="163" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <marker date="1463831345000" expanded="true" signature="965:984" placeholder="INSERT INTO Camera... " />
-            <marker date="1463831345000" expanded="true" signature="965:1012" placeholder="INSERT INTO Camera... " />
-            <marker date="1463831345000" expanded="true" signature="965:1040" placeholder="INSERT INTO " />
-            <marker date="1463831345000" expanded="true" signature="965:1043" placeholder="INSERT INTO missing_value... " />
-            <marker date="1463831345000" expanded="true" signature="1533:1614" placeholder="INSERT INTO Location... " />
-            <marker date="1463831345000" expanded="true" signature="2120:2199" placeholder="INSERT INTO Photographer... " />
-            <marker date="1463831345000" expanded="true" signature="2749:2848" placeholder="INSERT INTO PhotographerCamera... " />
-            <marker date="1463831345000" expanded="true" signature="3406:3509" placeholder="INSERT INTO PhotographerLocation" />
-            <marker date="1463831345000" expanded="true" signature="3663:3683" placeholder="SELECT * FRO... Camera" />
-            <marker date="1463831345000" expanded="true" signature="4353:4380" placeholder="SELECT * FRO... Camera" />
-            <marker date="1463831345000" expanded="true" signature="4597:4619" placeholder="SELECT * FRO... Location" />
-            <marker date="1463831345000" expanded="true" signature="5308:5337" placeholder="SELECT * FRO... Location" />
-            <marker date="1463831345000" expanded="true" signature="5560:5586" placeholder="SELECT * FRO... Photographer" />
-            <marker date="1463831345000" expanded="true" signature="6194:6227" placeholder="SELECT * FRO... Photographer" />
-            <marker date="1463831345000" expanded="true" signature="6469:7140" placeholder="SELECT photo... Photo" />
+            <element signature="e#0#21#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -916,9 +832,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="40" column="30" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -958,22 +872,7 @@
         <state relative-caret-position="0">
           <caret line="295" column="25" selection-start-line="295" selection-start-column="25" selection-end-line="295" selection-end-column="25" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <marker date="1463831345000" expanded="true" signature="965:984" placeholder="INSERT INTO Camera... " />
-            <marker date="1463831345000" expanded="true" signature="965:1012" placeholder="INSERT INTO Camera... " />
-            <marker date="1463831345000" expanded="true" signature="965:1040" placeholder="INSERT INTO " />
-            <marker date="1463831345000" expanded="true" signature="965:1043" placeholder="INSERT INTO missing_value... " />
-            <marker date="1463831345000" expanded="true" signature="1533:1614" placeholder="INSERT INTO Location... " />
-            <marker date="1463831345000" expanded="true" signature="2120:2199" placeholder="INSERT INTO Photographer... " />
-            <marker date="1463831345000" expanded="true" signature="2749:2848" placeholder="INSERT INTO PhotographerCamera... " />
-            <marker date="1463831345000" expanded="true" signature="3406:3509" placeholder="INSERT INTO PhotographerLocation" />
-            <marker date="1463831345000" expanded="true" signature="3663:3683" placeholder="SELECT * FRO... Camera" />
-            <marker date="1463831345000" expanded="true" signature="4353:4380" placeholder="SELECT * FRO... Camera" />
-            <marker date="1463831345000" expanded="true" signature="4597:4619" placeholder="SELECT * FRO... Location" />
-            <marker date="1463831345000" expanded="true" signature="5308:5337" placeholder="SELECT * FRO... Location" />
-            <marker date="1463831345000" expanded="true" signature="5560:5586" placeholder="SELECT * FRO... Photographer" />
-            <marker date="1463831345000" expanded="true" signature="6194:6227" placeholder="SELECT * FRO... Photographer" />
-            <marker date="1463831345000" expanded="true" signature="6469:7140" placeholder="SELECT photo... Photo" />
+            <element signature="e#0#21#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -982,9 +881,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="40" column="30" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1024,22 +921,7 @@
         <state relative-caret-position="0">
           <caret line="295" column="25" selection-start-line="295" selection-start-column="25" selection-end-line="295" selection-end-column="25" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <marker date="1463831345000" expanded="true" signature="965:984" placeholder="INSERT INTO Camera... " />
-            <marker date="1463831345000" expanded="true" signature="965:1012" placeholder="INSERT INTO Camera... " />
-            <marker date="1463831345000" expanded="true" signature="965:1040" placeholder="INSERT INTO " />
-            <marker date="1463831345000" expanded="true" signature="965:1043" placeholder="INSERT INTO missing_value... " />
-            <marker date="1463831345000" expanded="true" signature="1533:1614" placeholder="INSERT INTO Location... " />
-            <marker date="1463831345000" expanded="true" signature="2120:2199" placeholder="INSERT INTO Photographer... " />
-            <marker date="1463831345000" expanded="true" signature="2749:2848" placeholder="INSERT INTO PhotographerCamera... " />
-            <marker date="1463831345000" expanded="true" signature="3406:3509" placeholder="INSERT INTO PhotographerLocation" />
-            <marker date="1463831345000" expanded="true" signature="3663:3683" placeholder="SELECT * FRO... Camera" />
-            <marker date="1463831345000" expanded="true" signature="4353:4380" placeholder="SELECT * FRO... Camera" />
-            <marker date="1463831345000" expanded="true" signature="4597:4619" placeholder="SELECT * FRO... Location" />
-            <marker date="1463831345000" expanded="true" signature="5308:5337" placeholder="SELECT * FRO... Location" />
-            <marker date="1463831345000" expanded="true" signature="5560:5586" placeholder="SELECT * FRO... Photographer" />
-            <marker date="1463831345000" expanded="true" signature="6194:6227" placeholder="SELECT * FRO... Photographer" />
-            <marker date="1463831345000" expanded="true" signature="6469:7140" placeholder="SELECT photo... Photo" />
+            <element signature="e#0#21#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1048,9 +930,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1108,13 +988,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="28" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/location/list_filtered.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -1181,14 +1054,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lab02/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../.env/lib/python2.7/site-packages/django/views/generic/list.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
@@ -1205,67 +1070,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lab02/db.py">
+    <entry file="file://$PROJECT_DIR$/lab02/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+        <state relative-caret-position="352">
+          <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <marker date="1463831345000" expanded="true" signature="965:984" placeholder="INSERT INTO Camera... " />
-            <marker date="1463831345000" expanded="true" signature="965:1012" placeholder="INSERT INTO Camera... " />
-            <marker date="1463831345000" expanded="true" signature="965:1040" placeholder="INSERT INTO " />
-            <marker date="1463831345000" expanded="true" signature="965:1043" placeholder="INSERT INTO missing_value... " />
-            <marker date="1463831345000" expanded="true" signature="1533:1614" placeholder="INSERT INTO Location... " />
-            <marker date="1463831345000" expanded="true" signature="2120:2199" placeholder="INSERT INTO Photographer... " />
-            <marker date="1463831345000" expanded="true" signature="2749:2848" placeholder="INSERT INTO PhotographerCamera... " />
-            <marker date="1463831345000" expanded="true" signature="3406:3509" placeholder="INSERT INTO PhotographerLocation" />
-            <marker date="1463831345000" expanded="true" signature="3663:3683" placeholder="SELECT * FRO... Camera" />
-            <marker date="1463831345000" expanded="true" signature="4353:4380" placeholder="SELECT * FRO... Camera" />
-            <marker date="1463831345000" expanded="true" signature="4597:4619" placeholder="SELECT * FRO... Location" />
-            <marker date="1463831345000" expanded="true" signature="5308:5337" placeholder="SELECT * FRO... Location" />
-            <marker date="1463831345000" expanded="true" signature="5560:5586" placeholder="SELECT * FRO... Photographer" />
-            <marker date="1463831345000" expanded="true" signature="6194:6227" placeholder="SELECT * FRO... Photographer" />
-            <marker date="1463831345000" expanded="true" signature="6469:7140" placeholder="SELECT photo... Photo" />
+            <element signature="e#0#24#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lab02/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="32">
+          <caret line="2" column="16" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/camera/list_filtered.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/location/list_filtered.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="38" column="20" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lab02/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="126" column="16" selection-start-line="126" selection-start-column="16" selection-end-line="126" selection-end-column="16" />
+        <state relative-caret-position="429">
+          <caret line="142" column="28" selection-start-line="142" selection-start-column="28" selection-end-line="142" selection-end-column="28" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lab02/forms.py">
+    <entry file="file://$PROJECT_DIR$/../../.env/lib/python2.7/site-packages/django/db/models/manager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="17" column="66" selection-start-line="17" selection-start-column="66" selection-end-line="17" selection-end-column="66" />
+        <state relative-caret-position="-1397">
+          <caret line="50" column="6" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2016.1/python_stubs/1571530039/__builtin__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="2764" column="8" selection-start-line="2764" selection-start-column="8" selection-end-line="2764" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab02/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/camera/list_filtered.html">
+    <entry file="file://$PROJECT_DIR$/lab02/db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state relative-caret-position="243">
+          <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
           <folding>
-            <element signature="n#style#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1463837028000" expanded="true" signature="2079:2178" placeholder="INSERT INTO `lab02db`.`lab02_photographer_cameras`... " />
+            <marker date="1463837028000" expanded="true" signature="2729:2832" placeholder="INSERT INTO `lab02db`.`lab02_photographer_locations(photographer_id, location_id)`... " />
           </folding>
         </state>
       </provider>
