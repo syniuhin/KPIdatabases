@@ -20,16 +20,22 @@ class PhotoSearchForm(forms.Form):
 
 
 class CameraAttributesForm(forms.Form):
-  date_created_from = forms.DateField(
-    label='From', required=False, widget=forms.SelectDateWidget(
-      years=sorted(map(lambda y: str(y).split('-')[0],
-                       map(lambda c: c.year_created,
-                           Camera.objects.all().iterator())))))
-  date_created_to = forms.DateField(
-    label='To', required=False, widget=forms.SelectDateWidget(
-      years=sorted(map(lambda y: str(y).split('-')[0],
-                       map(lambda c: c.year_created,
-                           Camera.objects.all().iterator())))))
+  date_created_from = forms.DateTimeField(
+    label='From', required=False,
+    widget=DateTimeWidget(attrs={'id': 'date_created_from'},
+                          usel10n=True,
+                          bootstrap_version=3,
+                          options={'startView': 2,
+                                   'minView': 2,
+                                   'maxView': 4}))
+  date_created_to = forms.DateTimeField(
+    label='To', required=False,
+    widget=DateTimeWidget(attrs={'id': 'date_created_to'},
+                          usel10n=True,
+                          bootstrap_version=3,
+                          options={'startView': 2,
+                                   'minView': 2,
+                                   'maxView': 4}))
   version = forms.IntegerField(label='Version', required=False)
 
 

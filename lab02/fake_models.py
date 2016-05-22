@@ -19,10 +19,10 @@ class Photo:
 
 
 class Camera:
-  def __init__(self, cam_id, name, year_created, version):
+  def __init__(self, cam_id, name, date_created, version):
     self.id = cam_id
     self.name = name
-    self.year_created = year_created
+    self.date_created = date_created
     self.version = version
 
 

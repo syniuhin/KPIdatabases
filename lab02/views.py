@@ -124,9 +124,9 @@ class FilterCameraListView(FormListView):
       version = self.cleaned_data.get('version')
       q = Q()
       if date_created_from is not None:
-        q = q & Q(year_created__gte=date_created_from)
+        q = q & Q(date_created__gte=date_created_from.date())
       if date_created_to is not None:
-        q = q & Q(year_created__lte=date_created_to)
+        q = q & Q(date_created__lte=date_created_to.date())
       if version is not None:
         q = q & Q(version=version)
       return Camera.objects.filter(q)

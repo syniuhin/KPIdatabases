@@ -16,7 +16,7 @@ def insert_into_camera():
   Camera.objects.all().delete()
   with open('/Users/infm/Coding/study/s4/db/lab02/input/camera.csv') as f:
     content = f.readlines()
-    colnames = ['name', 'year_created', 'version']
+    colnames = ['name', 'date_created', 'version']
     for line in content:
       Camera.objects.create(**dict(zip(colnames, line.rstrip().split(','))))
 

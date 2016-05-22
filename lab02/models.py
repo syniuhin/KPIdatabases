@@ -5,7 +5,7 @@ from django.db import models
 
 class Camera(models.Model):
   name = models.CharField(max_length=64)
-  year_created = models.DateField()
+  date_created = models.DateField()
   version = models.IntegerField()
 
   class Meta:
