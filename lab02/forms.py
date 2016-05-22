@@ -1,4 +1,5 @@
 from django import forms
+from datetimewidget.widgets import DateTimeWidget
 
 from .models import *
 
@@ -7,11 +8,15 @@ class PhotoForm(forms.ModelForm):
   class Meta:
     model = Photo
     exclude = []
+    widgets = {
+      'shot_time': DateTimeWidget(attrs={'id': 'shot_time'}, usel10n=True,
+                                  bootstrap_version=3)
+    }
 
 
 class PhotoSearchForm(forms.Form):
-  name = forms.CharField(label='Search', max_length=255,
-                         required=False)
+  search = forms.CharField(label='Search', max_length=255,
+                           required=False)
 
 
 class CameraAttributesForm(forms.Form):

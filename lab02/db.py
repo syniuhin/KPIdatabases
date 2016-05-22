@@ -56,6 +56,5 @@ def insert_into_photographer_location():
     content = f.readlines()
     for line in content:
       photographer_email, location_name = line.rstrip().split('&')
-      print '\"' + location_name + '\"'
       Photographer.objects.get(email=photographer_email).locations.add(
         Location.objects.get(name=location_name))

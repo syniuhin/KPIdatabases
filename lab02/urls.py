@@ -18,8 +18,8 @@ urlpatterns = [
 
   url(r'^photo/clicked/?$', views.on_click_photo, name='on_click_photo'),
   url(r'^photo/create/?$', views.PhotoController.create, name='new_photo'),
-  url(r'^photo/edit/(?P<photo_id>[0-9]+)/?$', views.PhotoController.update,
-      name='edit_photo'),
+  url(r'^photo/(?P<photo_id>[0-9]+)/update/?$', views.PhotoController.update,
+      name='update_photo'),
   url(r'^photo/delete/(?P<photo_id>[0-9]+)/?$', views.PhotoController.delete,
       name='delete_photo'),
   url(r'^photo/list/?$', PhotoListView.as_view(), name='photo_list'),

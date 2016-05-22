@@ -18,8 +18,8 @@ def index(request):
 def on_click_photo(request):
   if request.method == 'POST':
     if 'editbtn' in request.POST:
-      url = reverse('edit_photo', kwargs={'photo_id':
-                                            request.POST['tableradio']})
+      url = reverse('update_photo', kwargs={'photo_id':
+                                              request.POST['tableradio']})
       return HttpResponseRedirect(url)
     if 'deletebtn' in request.POST:
       url = reverse('delete_photo', kwargs={'photo_id':
@@ -38,7 +38,8 @@ class PhotoController:
       if form.is_valid():
         form.save()
         return HttpResponseRedirect('/photo/list/')
-    return render(request, 'photo/form.html', {'form': form})
+    return render(request, 'photo/form.html', {'form': form,
+                                               'action_url': '/photo/create'})
 
   @staticmethod
   def update(request, photo_id):
@@ -50,7 +51,9 @@ class PhotoController:
       if form.is_valid():
         form.save()
         return HttpResponseRedirect('/photo/list/')
-    return render(request, 'photo/form.html', {'form': form})
+    return render(request, 'photo/form.html',
+                  {'form': form,
+                   'action_url': '/photo/' + photo_id + '/update'})
 
   @staticmethod
   def delete(request, photo_id):
@@ -206,5 +209,12 @@ class FilterPhotoListView(FormListView):
 
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):
-      return Photo.objects.filter(self.cleaned_data)
-    return Photo.objects.get()
+      search = self.cleaned_data.get('search')
+      return Photo.objects.filter(Q(name__contains=search) |
+                                  Q(aperture__contains=search) |
+                                  Q(iso__contains=search) |
+                                  Q(shot_time__contains=search) |
+                                  Q(photographer__name__contains=search) |
+                                  Q(location__name__contains=search) |
+                                  Q(camera__name__contains=search))
+    return Photo.objects.all()
