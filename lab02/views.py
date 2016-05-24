@@ -69,6 +69,23 @@ class PhotoController:
     messages.add_message(request, messages.INFO, 'Trigger toggled')
     return HttpResponseRedirect('/photo/list')
 
+  @staticmethod
+  def change_event_interval(request):
+    if request.method == 'POST':
+      form = EventIntervalForm(request.POST)
+      if form.is_valid():
+        interval = form.cleaned_data.get('interval')
+        db.change_event_schedule_interval(interval)
+        messages.add_message(request, messages.INFO,
+                             'Event scheduled for %s' % interval)
+      else:
+        messages.add_message(request, messages.ERROR,
+                             'Please enter valid interval!')
+    else:
+      messages.add_message(request, messages.ERROR,
+                           'Can\'t GET the event scheduler!')
+    return HttpResponseRedirect('/photo/list')
+
 
 class PhotoListView(ListView):
   template_name = 'photo/list.html'
@@ -77,6 +94,7 @@ class PhotoListView(ListView):
   def get_context_data(self, **kwargs):
     context = super(PhotoListView, self).get_context_data(**kwargs)
     context['trigger_enabled'] = db.is_trigger_enabled()
+    context['event_form'] = EventIntervalForm()
     return context
 
 

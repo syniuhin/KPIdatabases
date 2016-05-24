@@ -12,6 +12,17 @@
 </head>
 <body>
 <h1 class="text-center">Photos</h1>
+<div class="navbar">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4" align="right">
+            <form action="/photo/list/event" method="post">
+                {% csrf_token %}
+                    {{ event_form }}
+                    <input type="submit" class="btn btn-default" value="Reschedule">
+            </form>
+        </div>
+</div>
 <form action="/photo/clicked/" method="post">
     {% csrf_token %}
     <div class="navbar-header col-lg-12"
@@ -29,7 +40,7 @@
                 {% if messages %}
                     {% for message in messages %}
                         <p class="text-info text-center"{% if message.tags %}
-                            class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                           class="{{ message.tags }}"{% endif %}>{{ message }}</p>
                     {% endfor %}
                 {% endif %}
             </div>
@@ -41,9 +52,9 @@
                    href="{% url 'photo_list_filter' %}">Filter</a>
                 <a href="{% url 'toggle_trigger' %}" class="btn btn-default">
                     {% if trigger_enabled %}
-                    Disable trigger
+                        Disable trigger
                     {% else %}
-                    Enable trigger
+                        Enable trigger
                     {% endif %}
                 </a>
             </div>

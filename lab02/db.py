@@ -107,3 +107,12 @@ def camera_usage(cam_id):
     cur = con.cursor()
     cur.execute('SELECT CAMERA_USAGE(%d);' % cam_id)
     return str(cur.fetchone()[0])
+
+
+def change_event_schedule_interval(interval):
+  con = mdb.connect(*mdb_args)
+  with con:
+    cur = con.cursor()
+    cur.execute("""ALTER EVENT clear_photos
+                        ON SCHEDULE %s
+                          STARTS CURRENT_TIMESTAMP;""" % interval)

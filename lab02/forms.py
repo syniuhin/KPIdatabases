@@ -1,5 +1,6 @@
-from django import forms
 from datetimewidget.widgets import DateTimeWidget
+from django import forms
+from django.forms import ValidationError
 
 from .models import *
 
@@ -57,3 +58,13 @@ class PhotographerAttributesForm(forms.Form):
   have_been_to = forms.ModelMultipleChoiceField(
     label='Have been to', required=False,
     queryset=Location.objects.all())
+
+
+class EventIntervalForm(forms.Form):
+  interval = forms.CharField(label='Schedule interval', max_length=32)
+
+  def clean(self):
+    super(EventIntervalForm, self).clean()
+    if 'interval' not in self.cleaned_data:
+      raise ValidationError('Please specify an interval!')
+    self.cleaned_data['interval'] = self.cleaned_data['interval'].upper()
