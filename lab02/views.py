@@ -1,7 +1,8 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http import HttpResponseRedirect, HttpResponseBadRequest, Http404
+from django.http import HttpResponseRedirect, HttpResponseBadRequest, Http404, \
+  HttpResponse
 from django.shortcuts import render
 from django.utils import timezone
 from django.views.generic.edit import FormMixin
@@ -9,23 +10,11 @@ from django.views.generic.list import ListView
 
 from .forms import *
 from .models import *
+import db
 
 
 def index(request):
   return HttpResponseRedirect('/photo/list')
-
-
-def on_click_photo(request):
-  if request.method == 'POST':
-    if 'editbtn' in request.POST:
-      url = reverse('update_photo', kwargs={'photo_id':
-                                              request.POST['tableradio']})
-      return HttpResponseRedirect(url)
-    if 'deletebtn' in request.POST:
-      url = reverse('delete_photo', kwargs={'photo_id':
-                                              request.POST['tableradio']})
-      return HttpResponseRedirect(url)
-  return HttpResponseBadRequest()
 
 
 class PhotoController:
@@ -56,11 +45,29 @@ class PhotoController:
                    'action_url': '/photo/' + photo_id + '/update'})
 
   @staticmethod
+  def clicked(request):
+    if request.method == 'POST':
+      if 'editbtn' in request.POST:
+        url = reverse('update_photo', kwargs={'photo_id':
+                                                request.POST['tableradio']})
+        return HttpResponseRedirect(url)
+      if 'deletebtn' in request.POST:
+        url = reverse('delete_photo', kwargs={'photo_id':
+                                                request.POST['tableradio']})
+        return HttpResponseRedirect(url)
+    return HttpResponseBadRequest()
+
+  @staticmethod
   def delete(request, photo_id):
     photo = Photo.objects.get(pk=photo_id)
-    messages.add_message(request, messages.WARNING, )
     photo.delete()
     return HttpResponseRedirect('/photo/list/')
+
+  @staticmethod
+  def toggle_trigger(request):
+    db.toggle_trigger()
+    messages.add_message(request, messages.INFO, 'Trigger toggled')
+    return HttpResponseRedirect('/photo/list')
 
 
 class PhotoListView(ListView):
@@ -69,7 +76,7 @@ class PhotoListView(ListView):
 
   def get_context_data(self, **kwargs):
     context = super(PhotoListView, self).get_context_data(**kwargs)
-    context['now'] = timezone.now()
+    context['trigger_enabled'] = db.is_trigger_enabled()
     return context
 
 
@@ -112,11 +119,6 @@ class FilterCameraListView(FormListView):
   form_class = CameraAttributesForm
   template_name = 'camera/list_filtered.html'
 
-  def get_context_data(self, **kwargs):
-    context = super(FilterCameraListView, self).get_context_data(**kwargs)
-    context['now'] = timezone.now()
-    return context
-
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):
       date_created_from = self.cleaned_data.get('date_created_from')
@@ -136,11 +138,6 @@ class FilterCameraListView(FormListView):
 class FilterLocationListView(FormListView):
   form_class = LocationAttributesForm
   template_name = 'location/list_filtered.html'
-
-  def get_context_data(self, **kwargs):
-    context = super(FilterLocationListView, self).get_context_data(**kwargs)
-    context['now'] = timezone.now()
-    return context
 
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):
@@ -169,11 +166,6 @@ class FilterPhotographerListView(FormListView):
   form_class = PhotographerAttributesForm
   template_name = 'photographer/list_filtered.html'
 
-  def get_context_data(self, **kwargs):
-    context = super(FilterPhotographerListView, self).get_context_data(**kwargs)
-    context['now'] = timezone.now()
-    return context
-
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):
       print self.cleaned_data
@@ -201,11 +193,6 @@ class FilterPhotographerListView(FormListView):
 class FilterPhotoListView(FormListView):
   form_class = PhotoSearchForm
   template_name = 'photo/list_filtered.html'
-
-  def get_context_data(self, **kwargs):
-    context = super(FilterPhotoListView, self).get_context_data(**kwargs)
-    context['now'] = timezone.now()
-    return context
 
   def get_queryset(self):
     if hasattr(self, 'cleaned_data'):

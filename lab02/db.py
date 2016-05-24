@@ -1,14 +1,17 @@
 from django.http import HttpResponseRedirect
+import MySQLdb as mdb
 
 from models import *
+
+mdb_args = ('localhost', 'root', '***REMOVED***', 'lab02db')
 
 
 def initiate_insert_into_tables(request):
   insert_into_camera()
   insert_into_location()
   insert_into_photographer()
-  insert_into_photographer_camera()
-  insert_into_photographer_location()
+  # insert_into_photographer_camera()
+  # insert_into_photographer_location()
   return HttpResponseRedirect('/')
 
 
@@ -58,3 +61,41 @@ def insert_into_photographer_location():
       photographer_email, location_name = line.rstrip().split('&')
       Photographer.objects.get(email=photographer_email).locations.add(
         Location.objects.get(name=location_name))
+
+
+def create_photo_trigger():
+  con = mdb.connect(*mdb_args)
+  with con:
+    cur = con.cursor()
+    cur.execute("""
+                CREATE TRIGGER ins_relations AFTER INSERT ON `lab02db`.`lab02_photo` 
+                FOR EACH ROW 
+                BEGIN 
+                	IF NEW.photographer_id IS NOT NULL THEN 
+                		INSERT INTO `lab02db`.`lab02_photographer_cameras`(photographer_id, camera_id) VALUES(NEW.photographer_id, NEW.camera_id); 
+                   INSERT INTO `lab02db`.`lab02_photographer_locations`(photographer_id, location_id) VALUES(NEW.photographer_id, NEW.location_id); 
+                	END IF; 
+                END; """)
+
+
+def drop_photo_trigger():
+  con = mdb.connect(*mdb_args)
+  with con:
+    cur = con.cursor()
+    cur.execute('DROP TRIGGER IF EXISTS ins_relations;')
+
+
+def is_trigger_enabled():
+  con = mdb.connect(*mdb_args)
+  with con:
+    cur = con.cursor()
+    cur.execute("""SHOW TRIGGERS LIKE 'lab02_photo';""")
+    is_enabled = False if cur.fetchone() is None else True
+  return is_enabled
+
+
+def toggle_trigger():
+  if is_trigger_enabled():
+    drop_photo_trigger()
+  else:
+    create_photo_trigger()
