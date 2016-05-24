@@ -120,6 +120,7 @@ class FilterCameraListView(FormListView):
   template_name = 'camera/list_filtered.html'
 
   def get_queryset(self):
+    queryset = []
     if hasattr(self, 'cleaned_data'):
       date_created_from = self.cleaned_data.get('date_created_from')
       date_created_to = self.cleaned_data.get('date_created_to')
@@ -131,8 +132,10 @@ class FilterCameraListView(FormListView):
         q = q & Q(date_created__lte=date_created_to.date())
       if version is not None:
         q = q & Q(version=version)
-      return Camera.objects.filter(q)
-    return Camera.objects.all()
+      queryset = Camera.objects.filter(q)
+    else:
+      queryset = Camera.objects.all()
+    return zip(queryset, [db.camera_usage(q.id) for q in queryset])
 
 
 class FilterLocationListView(FormListView):

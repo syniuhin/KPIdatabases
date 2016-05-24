@@ -99,3 +99,11 @@ def toggle_trigger():
     drop_photo_trigger()
   else:
     create_photo_trigger()
+
+
+def camera_usage(cam_id):
+  con = mdb.connect(*mdb_args)
+  with con:
+    cur = con.cursor()
+    cur.execute('SELECT CAMERA_USAGE(%d);' % cam_id)
+    return str(cur.fetchone()[0])

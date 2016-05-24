@@ -36,15 +36,17 @@
                 <th class="header"> Name <i class="icon-sort"></i></th>
                 <th class="header"> Date created <i class="icon-sort"></i></th>
                 <th class="header"> Version <i class="icon-sort"></i></th>
+                <th class="header"> <span style="color: #b92c28;"> Usage count </span> </th>
             </tr>
             </thead>
             <tbody>
 
-            {% for camera in object_list %}
+            {% for camera, camera_usage in object_list %}
                 <tr>
                     <td>{{ camera.name }}</td>
                     <td>{{ camera.date_created }}</td>
                     <td>{{ camera.version }}</td>
+                    <td>{{ camera_usage }}</td>
                 </tr>
             {% endfor %}
 
