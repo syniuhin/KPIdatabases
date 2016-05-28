@@ -3,7 +3,7 @@ import MySQLdb as mdb
 
 from models import *
 
-mdb_args = ('localhost', 'root', '***REMOVED***', 'lab02db')
+mdb_args = ('localhost', 'root', '**USE YOURS**', 'lab02db')
 
 
 def initiate_insert_into_tables(request):
